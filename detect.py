@@ -119,8 +119,10 @@ def detect(opt):
 
             # Stream results
             if view_img:
-                cv2.imshow(str(p), im0)
-                cv2.waitKey(1)  # 1 millisecond
+                cv2.namedWindow('Channel NO.{}'.format(p), cv2.WINDOW_NORMAL)
+                cv2.imshow('Channel NO.{}'.format(p), im0)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
 
             # Save results (image with detections)
             if save_img:
@@ -169,7 +171,7 @@ if __name__ == '__main__':
     parser.add_argument('--project', default='runs/detect', help='save results to project/name')
     parser.add_argument('--name', default='exp', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
-    parser.add_argument('--line-thickness', default=3, type=int, help='bounding box thickness (pixels)')
+    parser.add_argument('--line-thickness', default=2, type=int, help='bounding box thickness (pixels)')
     parser.add_argument('--hide-labels', default=False, action='store_true', help='hide labels')
     parser.add_argument('--hide-conf', default=False, action='store_true', help='hide confidences')
     opt = parser.parse_args()
